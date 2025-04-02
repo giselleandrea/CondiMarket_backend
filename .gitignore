@@ -1,0 +1,57 @@
+# Compilación y dependencias
+/target/
+*.jar
+*.war
+*.ear
+
+# Archivos de configuración de entorno
+.env
+
+# Archivos de Maven
+.mvn/
+!**/mvnw
+!**/mvnw.cmd
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.m2/
+
+# Configuración de IDEs y editores
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Configuración de Eclipse
+.classpath
+.project
+.settings/
+
+# Logs y cachés
+logs/
+*.log
+hs_err_pid*
+
+# Archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos generados por cobertura de código
+jacoco.exec
+.jacoco/
+
+# Archivos de pruebas y resultados
+/test-output/
+/target/surefire-reports/
+/target/failsafe-reports/
+
+# Docker
+docker-compose.override.yml
+
+# Otros archivos innecesarios
+*.swp
+*.swo
