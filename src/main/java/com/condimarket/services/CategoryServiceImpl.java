@@ -6,6 +6,7 @@ import com.condimarket.persistence.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,4 +41,15 @@ public class CategoryServiceImpl implements CategoryService {
                 .category(saved.getCategory())
                 .build();
     }
+
+    @Override
+    public Optional<CategoryDto> findByCategoryName(String categoryName) {
+        return categoryRepository.findAll().stream()
+                .filter(cat -> cat.getCategory().equalsIgnoreCase(categoryName))
+                .findFirst()
+                .map(cat -> CategoryDto.builder()
+                        .id(cat.getId())
+                        .category(cat.getCategory())
+                        .build());
+}
 }
