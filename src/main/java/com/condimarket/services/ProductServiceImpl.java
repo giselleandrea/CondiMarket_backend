@@ -8,23 +8,69 @@ import com.condimarket.persistence.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
+        private final ProductRepository productRepository;
+        private final CategoryRepository categoryRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository) {
-        this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
-    }
+        public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository) {
+                this.productRepository = productRepository;
+                this.categoryRepository = categoryRepository;
+        }
 
-    @Override
-    public List<ProductDto> getAllProducts() {
-        return productRepository.findAll().stream()
-                .map(product -> ProductDto.builder()
+        @Override
+        public List<ProductDto> getAllProducts() {
+                return productRepository.findAll().stream()
+                        .map(this::mapToDto)
+                        .collect(Collectors.toList());
+        }
+
+        @Override
+        public ProductDto createProduct(ProductDto productDto) {
+                Optional<Category> categoryOpt = categoryRepository.findById(productDto.getCategoryId());
+
+                if (categoryOpt.isEmpty()) {
+                throw new RuntimeException("Categoría no encontrada");
+                }
+
+                Product product = Product.builder()
+                        .nameProduct(productDto.getNameProduct())
+                        .referenceProduct(productDto.getReferenceProduct())
+                        .amountProduct(productDto.getAmountProduct())
+                        .description(productDto.getDescription())
+                        .stock(productDto.getStock())
+                        .category(categoryOpt.get())
+                        .build();
+
+                Product saved = productRepository.save(product);
+                return mapToDto(saved);
+        }
+
+        @Override
+        public List<ProductDto> filterProducts(Long categoryId, String name) {
+                List<Product> filtered;
+
+                if (categoryId != null && name != null) {
+                filtered = productRepository.findByCategoryIdAndNameProductContainingIgnoreCase(categoryId, name);
+                } else if (categoryId != null) {
+                filtered = productRepository.findByCategoryId(categoryId);
+                } else if (name != null) {
+                filtered = productRepository.findByNameProductContainingIgnoreCase(name);
+                } else {
+                filtered = productRepository.findAll();
+                }
+
+                return filtered.stream()
+                        .map(this::mapToDto)
+                        .collect(Collectors.toList());
+        }
+
+        private ProductDto mapToDto(Product product) {
+                return ProductDto.builder()
                         .id(product.getId())
                         .nameProduct(product.getNameProduct())
                         .referenceProduct(product.getReferenceProduct())
@@ -32,35 +78,6 @@ public class ProductServiceImpl implements ProductService {
                         .description(product.getDescription())
                         .stock(product.getStock())
                         .categoryId(product.getCategory().getId())
-                        .categoryName(product.getCategory().getCategory())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public ProductDto createProduct(ProductDto dto) {
-        Category category = categoryRepository.findById(dto.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
-
-        Product product = Product.builder()
-                .nameProduct(dto.getNameProduct())
-                .referenceProduct(dto.getReferenceProduct())
-                .amountProduct(dto.getAmountProduct())
-                .description(dto.getDescription())
-                .stock(dto.getStock())
-                .category(category)
-                .build();
-
-        Product saved = productRepository.save(product);
-
-        return ProductDto.builder()
-                .id(saved.getId())
-                .nameProduct(saved.getNameProduct())
-                .referenceProduct(saved.getReferenceProduct())
-                .amountProduct(saved.getAmountProduct())
-                .description(saved.getDescription())
-                .stock(saved.getStock())
-                .categoryId(saved.getCategory().getId())
-                .build();
-    }
+                        .build();
+        }
 }
