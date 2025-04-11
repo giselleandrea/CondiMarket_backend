@@ -1,1 +1,17 @@
+com/condimarket/dto/ProductDto.class
 com/condimarket/App.class
+com/condimarket/controllers/ProductController.class
+com/condimarket/controllers/CategoryController.class
+com/condimarket/services/CategoryService.class
+com/condimarket/persistence/entities/Category$CategoryBuilder.class
+com/condimarket/persistence/repositories/ProductRepository.class
+com/condimarket/dto/CategoryDto$CategoryDtoBuilder.class
+com/condimarket/persistence/entities/Product$ProductBuilder.class
+com/condimarket/persistence/entities/Category.class
+com/condimarket/persistence/entities/Product.class
+com/condimarket/persistence/repositories/CategoryRepository.class
+com/condimarket/services/CategoryServiceImpl.class
+com/condimarket/dto/CategoryDto.class
+com/condimarket/services/ProductService.class
+com/condimarket/services/ProductServiceImpl.class
+com/condimarket/dto/ProductDto$ProductDtoBuilder.class
