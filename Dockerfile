@@ -1,17 +1,23 @@
-# Usar una imagen base de Java
-FROM openjdk:17-jdk-slim
-
-# Crear un directorio para la aplicación
+# Etapa 1: Construcción del JAR
+FROM maven:3.9.6-eclipse-temurin-21 AS builder
 WORKDIR /app
 
-# Copiar el archivo JAR generado por Spring Boot
-COPY target/bkedinventario-0.0.1-SNAPSHOT.jar app.jar
+# Copia los archivos necesarios para construir
+COPY pom.xml .
+COPY src ./src
 
-# Exponer el puerto 8862
-EXPOSE 8862
+# Construir el proyecto sin tests
+RUN mvn clean package -DskipTests
 
-# Variables de entorno para la base de datos
+# Etapa 2: Imagen ligera para producción
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
 
+# Copiar el JAR desde la etapa anterior
+COPY --from=builder /app/target/*.jar app.jar
 
-# Ejecutar la aplicación
+# Puerto de la app
+EXPOSE 8080
+
+# Ejecutar el JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
