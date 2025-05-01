@@ -21,3 +21,5 @@ public class App
         SpringApplication.run(App.class, args);
     }
 }
+//mvn clean install
+//mvn spring-boot:run
