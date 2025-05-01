@@ -1,5 +1,5 @@
-FROM maven:3.9.6-eclipse-temurin-21 
-ENV JAVA_HOME /usr/java/openjdk-21
+FROM maven:3.8.3-openjdk-17
+ENV JAVA_HOME /usr/java/openjdk-17
 RUN export JAVA_HOME
 
 RUN mkdir -p /app
