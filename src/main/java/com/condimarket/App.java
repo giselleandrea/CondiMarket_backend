@@ -22,4 +22,4 @@ public class App
     }
 }
 //mvn clean install
-//mvn spring-boot:run
+//Iniciar proyecto mvn spring-boot:run   
