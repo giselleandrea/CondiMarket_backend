@@ -16,6 +16,11 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "CondiMarket API está funcionando ✅";
+    }
+
     @GetMapping
     public List<CategoryDto> getAll() {
         return categoryService.getAllCategories();
