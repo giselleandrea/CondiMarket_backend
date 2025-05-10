@@ -11,6 +11,7 @@
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/services/UserService.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/dto/UserDto.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/controllers/UserController.java
+/var/www/html/CondiMarket_backend/src/main/java/com/condimarket/config/SecurityConfig.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/services/CategoryServiceImpl.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/services/ProductService.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/services/UserServiceImpl.java
