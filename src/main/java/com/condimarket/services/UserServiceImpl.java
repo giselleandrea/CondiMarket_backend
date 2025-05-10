@@ -1,0 +1,76 @@
+package com.condimarket.services;
+
+import com.condimarket.dto.UserDto;
+import com.condimarket.persistence.entities.User;
+import com.condimarket.persistence.repositories.UserRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> UserDto.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .email(user.getEmail())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserDto createUser(UserDto dto) {
+        User user = User.builder()
+                .name(dto.getName())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .build();
+
+        User saved = userRepository.save(user);
+
+        return UserDto.builder()
+                .id(saved.getId())
+                .name(saved.getName())
+                .email(saved.getEmail())
+                .build();
+    }
+
+
+    @Override
+    public UserDto getUserById(Long id) {
+        return userRepository.findById(id)
+                .map(user -> UserDto.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .email(user.getEmail())
+                        .build())
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
+
+    @Override
+    public UserDto updateUser(Long id, UserDto dto) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setName(dto.getName());
+                    user.setEmail(dto.getEmail());
+                    User updated = userRepository.save(user);
+                    return UserDto.builder()
+                            .id(updated.getId())
+                            .name(updated.getName())
+                            .email(updated.getEmail())
+                            .build();
+                })
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
+
+}
