@@ -12,44 +12,44 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryRepository categoryRepository;
+        private final CategoryRepository categoryRepository;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+        public CategoryServiceImpl(CategoryRepository categoryRepository) {
+                this.categoryRepository = categoryRepository;
+        }
 
-    @Override
-    public List<CategoryDto> getAllCategories() {
-        return categoryRepository.findAll().stream()
-                .map(cat -> CategoryDto.builder()
-                        .id(cat.getId())
-                        .category(cat.getCategory())
-                        .build())
-                .collect(Collectors.toList());
-    }
+        @Override
+        public List<CategoryDto> getAllCategories() {
+                return categoryRepository.findAll().stream()
+                        .map(cat -> CategoryDto.builder()
+                                .id(cat.getId())
+                                .category(cat.getCategory())
+                                .build())
+                        .collect(Collectors.toList());
+        }
 
-    @Override
-    public CategoryDto createCategory(CategoryDto dto) {
-        Category category = Category.builder()
-                .category(dto.getCategory())
-                .build();
+        @Override
+        public CategoryDto createCategory(CategoryDto dto) {
+                Category category = Category.builder()
+                        .category(dto.getCategory())
+                        .build();
 
-        Category saved = categoryRepository.save(category);
+                Category saved = categoryRepository.save(category);
 
-        return CategoryDto.builder()
-                .id(saved.getId())
-                .category(saved.getCategory())
-                .build();
-    }
+                return CategoryDto.builder()
+                        .id(saved.getId())
+                        .category(saved.getCategory())
+                        .build();
+        }
 
-    @Override
-    public Optional<CategoryDto> findByCategoryName(String categoryName) {
-        return categoryRepository.findAll().stream()
-                .filter(cat -> cat.getCategory().equalsIgnoreCase(categoryName))
-                .findFirst()
-                .map(cat -> CategoryDto.builder()
-                        .id(cat.getId())
-                        .category(cat.getCategory())
-                        .build());
-}
+        @Override
+        public Optional<CategoryDto> findByCategoryName(String categoryName) {
+                return categoryRepository.findAll().stream()
+                        .filter(cat -> cat.getCategory().equalsIgnoreCase(categoryName))
+                        .findFirst()
+                        .map(cat -> CategoryDto.builder()
+                                .id(cat.getId())
+                                .category(cat.getCategory())
+                                .build());
+        }
 }
