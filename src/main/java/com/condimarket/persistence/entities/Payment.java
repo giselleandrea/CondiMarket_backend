@@ -17,9 +17,9 @@ public class Payment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    //@ManyToOne
-    //@JoinColumn(name = "order_id")
-    //private Order order;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "payment_method_id")
