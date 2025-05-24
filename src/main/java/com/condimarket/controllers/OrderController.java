@@ -1,6 +1,6 @@
 package com.condimarket.controllers;
 
-import com.condimarket.persistence.entities.Order;
+import com.condimarket.dto.OrderDTO;
 import com.condimarket.services.OrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,27 +18,17 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        return orderService.createOrder(order);
+    public OrderDTO createOrder(@RequestBody OrderDTO orderDTO) {
+        return orderService.createOrder(orderDTO);
     }
 
     @GetMapping
-    public List<Order> getAllOrders() {
+    public List<OrderDTO> getAllOrders() {
         return orderService.getAllOrders();
     }
 
     @GetMapping("/{id}")
-    public Optional<Order> getOrderById(@PathVariable Long id) {
+    public Optional<OrderDTO> getOrderById(@PathVariable Long id) {
         return orderService.getOrderById(id);
-    }
-
-    @GetMapping("/user/{userId}")
-    public List<Order> getOrdersByUser(@PathVariable Long userId) {
-        return orderService.getOrdersByUser(userId);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable Long id) {
-        orderService.deleteOrder(id);
     }
 }

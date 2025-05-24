@@ -1,10 +1,11 @@
 package com.condimarket.controllers;
 
-import com.condimarket.persistence.entities.Payment;
+import com.condimarket.dto.PaymentDTO;
 import com.condimarket.services.PaymentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/payments")
@@ -17,17 +18,17 @@ public class PaymentController {
     }
 
     @PostMapping
-    public Payment createPayment(@RequestBody Payment payment) {
-        return paymentService.createPayment(payment);
+    public PaymentDTO createPayment(@RequestBody PaymentDTO dto) {
+        return paymentService.createPayment(dto);
     }
 
     @GetMapping
-    public List<Payment> getAllPayments() {
+    public List<PaymentDTO> getAllPayments() {
         return paymentService.getAllPayments();
     }
 
-    @GetMapping("/user/{userId}")
-    public List<Payment> getPaymentsByUser(@PathVariable Long userId) {
-        return paymentService.getPaymentsByUser(userId);
+    @GetMapping("/{id}")
+    public Optional<PaymentDTO> getPaymentById(@PathVariable Long id) {
+        return paymentService.getPaymentById(id);
     }
 }
