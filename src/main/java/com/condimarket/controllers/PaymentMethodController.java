@@ -1,7 +1,7 @@
 package com.condimarket.controllers;
 
-import com.condimarket.persistence.entities.PaymentMethod;
-import com.condimarket.persistence.repositories.PaymentMethodRepository;
+import com.condimarket.dto.PaymentMethodDTO;
+import com.condimarket.services.PaymentMethodService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +10,19 @@ import java.util.List;
 @RequestMapping("/payment-methods")
 public class PaymentMethodController {
 
-    private final PaymentMethodRepository paymentMethodRepository;
+    private final PaymentMethodService paymentMethodService;
 
-    public PaymentMethodController(PaymentMethodRepository paymentMethodRepository) {
-        this.paymentMethodRepository = paymentMethodRepository;
+    public PaymentMethodController(PaymentMethodService paymentMethodService) {
+        this.paymentMethodService = paymentMethodService;
     }
 
     @PostMapping
-    public PaymentMethod create(@RequestBody PaymentMethod paymentMethod) {
-        return paymentMethodRepository.save(paymentMethod);
+    public PaymentMethodDTO createPaymentMethod(@RequestBody PaymentMethodDTO dto) {
+        return paymentMethodService.createPaymentMethod(dto);
     }
 
-    @GetMapping("/user/{userId}")
-    public List<PaymentMethod> getByUser(@PathVariable Long userId) {
-        return paymentMethodRepository.findByUserId(userId);
+    @GetMapping
+    public List<PaymentMethodDTO> getAllPaymentMethods() {
+        return paymentMethodService.getAllPaymentMethods();
     }
 }
