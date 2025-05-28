@@ -80,6 +80,7 @@ public class ProductServiceImpl implements ProductService {
                         .stock(product.getStock())
                         .image(product.getImage())
                         .categoryId(product.getCategory().getId())
+                        .categoryName(product.getCategory().getCategory())
                         .build();
         }
 }
