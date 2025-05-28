@@ -43,6 +43,7 @@ public class ProductServiceImpl implements ProductService {
                         .amountProduct(productDto.getAmountProduct())
                         .description(productDto.getDescription())
                         .stock(productDto.getStock())
+                        .image(productDto.getImage())
                         .category(categoryOpt.get())
                         .build();
 
@@ -77,6 +78,7 @@ public class ProductServiceImpl implements ProductService {
                         .amountProduct(product.getAmountProduct())
                         .description(product.getDescription())
                         .stock(product.getStock())
+                        .image(product.getImage())
                         .categoryId(product.getCategory().getId())
                         .build();
         }
