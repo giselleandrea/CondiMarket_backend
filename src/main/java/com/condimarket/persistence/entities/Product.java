@@ -36,6 +36,9 @@ public class Product {
     @Column(name = "stock")
     private Integer stock;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "created_at", updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
