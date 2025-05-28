@@ -51,8 +51,4 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public double getPrice() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrice'");
-    }
 }
