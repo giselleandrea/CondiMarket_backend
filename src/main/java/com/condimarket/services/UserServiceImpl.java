@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService {
                                 .id(user.getId())
                                 .name(user.getName())
                                 .email(user.getEmail())
+                                .phone(user.getPhone())
+                                .address(user.getAddress())
                                 .build())
                         .collect(Collectors.toList());
         }
@@ -39,6 +41,8 @@ public class UserServiceImpl implements UserService {
                         .name(dto.getName())
                         .email(dto.getEmail())
                         .password(encodedPassword)
+                        .phone(dto.getPhone())
+                        .address(dto.getAddress())
                         .build();
 
                 User saved = userRepository.save(user);
@@ -47,6 +51,8 @@ public class UserServiceImpl implements UserService {
                         .id(saved.getId())
                         .name(saved.getName())
                         .email(saved.getEmail())
+                        .phone(saved.getPhone())
+                        .address(saved.getAddress())
                         .build();
         }
 
@@ -58,6 +64,8 @@ public class UserServiceImpl implements UserService {
                                 .id(user.getId())
                                 .name(user.getName())
                                 .email(user.getEmail())
+                                .phone(user.getPhone())
+                                .address(user.getAddress())
                                 .build())
                         .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
         }
@@ -73,6 +81,8 @@ public class UserServiceImpl implements UserService {
                                 .id(updated.getId())
                                 .name(updated.getName())
                                 .email(updated.getEmail())
+                                .phone(updated.getPhone())
+                                .address(updated.getAddress())
                                 .build();
                         })
                         .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
