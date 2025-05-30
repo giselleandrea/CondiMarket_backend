@@ -36,6 +36,7 @@ com/condimarket/dto/CategoryDto$CategoryDtoBuilder.class
 com/condimarket/controllers/PaymentMethodController.class
 com/condimarket/persistence/repositories/CategoryRepository.class
 com/condimarket/services/CategoryServiceImpl.class
+com/condimarket/config/CorsConfig$1.class
 com/condimarket/dto/CategoryDto.class
 com/condimarket/dto/AuthResponse.class
 com/condimarket/services/CartService.class
@@ -48,4 +49,5 @@ com/condimarket/persistence/repositories/ProductRepository.class
 com/condimarket/persistence/entities/Product$ProductBuilder.class
 com/condimarket/persistence/repositories/OrderRepository.class
 com/condimarket/persistence/entities/User.class
+com/condimarket/config/CorsConfig.class
 com/condimarket/persistence/entities/Order.class

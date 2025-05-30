@@ -30,6 +30,7 @@
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/dto/AuthResponse.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/services/OrderService.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/services/PaymentService.java
+/var/www/html/CondiMarket_backend/src/main/java/com/condimarket/config/CorsConfig.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/persistence/repositories/ProductRepository.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/persistence/repositories/OrderRepository.java
 /var/www/html/CondiMarket_backend/src/main/java/com/condimarket/persistence/entities/Order.java
